@@ -1,0 +1,113 @@
+<div fxLayout="row" 
+    fxLayoutAlign="center center">
+    <mat-card class="mat-elevation-z4" 
+        fxFlex="50"
+        fxFlex.lt-md="100">
+        <mat-card-title>
+            <div fxLayout="row"
+                fxLayoutAlign="space-between center">
+                <div fxFlex="50">
+                    <span>Nuevo Vuelo</span>
+                </div>
+        
+                <div fxFlex="50"
+                    fxLayoutAlign="end">
+                    <div fxLayout="row" 
+                        fxLayoutGap="15px"
+                        fxLayoutGap.xs="10px">
+                        
+                        <button mat-raised-button 
+                            color="accent"
+                            (click)="irAConsulta()">
+                            Consultar vuelos
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </mat-card-title>
+    
+        <br>
+    
+        <mat-card-content>
+            <form (ngSubmit)="guardar()" [formGroup]="miFormulario" autocomplete="off">
+                <div fxLayout="row"
+                    fxLayoutGap="20px"
+                    fxLayout.lt-sm="column"
+                    fxLayoutGap.lt-sm="0">
+                    <mat-form-field appearance="outline" fxFlex="100">
+                        <mat-label>Ciudad de origen</mat-label>
+                        <mat-select formControlName="ciudadOrigenId" [errorStateMatcher]="validarService.matcher">
+                            <mat-option *ngFor="let ciudad of ciudades" [value]="ciudad.id">{{ ciudad.nombre | titlecase }}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="validarService.campoEsValido('ciudadOrigenId')">{{validarService.getMensaje('ciudadOrigenId')}}</mat-error>
+                    </mat-form-field>
+    
+                    <mat-form-field appearance="outline" fxFlex="100">
+                        <mat-label>Ciudad de destino</mat-label>
+                        <mat-select formControlName="ciudadDestinoId" [errorStateMatcher]="validarService.matcher">
+                            <mat-option *ngFor="let ciudad of ciudades" [value]="ciudad.id">{{ ciudad.nombre | titlecase }}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="validarService.campoEsValido('ciudadDestinoId')">{{validarService.getMensaje('ciudadDestinoId')}}</mat-error>
+                    </mat-form-field>
+                </div>
+    
+                <div fxLayout="row"
+                    fxLayoutGap="20px"
+                    fxLayout.lt-sm="column"
+                    fxLayoutGap.lt-sm="0">
+                    <mat-form-field appearance="outline" fxFlex="100">
+                        <mat-label>Fecha</mat-label>
+                        <input matInput type="date" [min]="minFecha" placeholder="Fecha" formControlName="fecha" [errorStateMatcher]="validarService.matcher">
+                        <mat-error *ngIf="validarService.campoEsValido('fecha')">{{validarService.getMensaje('fecha')}}</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div fxLayout="row"
+                    fxLayoutGap="20px"
+                    fxLayout.lt-sm="column"
+                    fxLayoutGap.lt-sm="0">
+                    <mat-form-field appearance="outline" fxFlex="100">
+                        <mat-label>Hora de salida</mat-label>
+                        <input matInput type="time" placeholder="Hora de salida" formControlName="horaSalida" [errorStateMatcher]="validarService.matcher">
+                        <mat-error *ngIf="validarService.campoEsValido('horaSalida')">{{validarService.getMensaje('horaSalida')}}</mat-error>
+                    </mat-form-field>
+    
+                    <mat-form-field appearance="outline" fxFlex="100">
+                        <mat-label>Hora de llegada</mat-label>
+                        <input matInput type="time" placeholder="Hora de llegada" formControlName="horaLlegada" [errorStateMatcher]="validarService.matcher">
+                        <mat-error *ngIf="validarService.campoEsValido('horaLlegada')">{{validarService.getMensaje('horaLlegada')}}</mat-error>
+                    </mat-form-field>
+                </div>
+    
+                <div fxLayout="row"
+                    fxLayoutGap="20px"
+                    fxLayout.lt-sm="column"
+                    fxLayoutGap.lt-sm="0">
+                    
+                    <mat-form-field appearance="outline" fxFlex="100">
+                        <mat-label>Aerolínea</mat-label>
+                        <mat-select formControlName="aerolineaId" [errorStateMatcher]="validarService.matcher">
+                            <mat-option *ngFor="let aerolinea of aerolineas" [value]="aerolinea.id">{{ aerolinea.nombre | titlecase }}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="validarService.campoEsValido('aerolineaId')">{{validarService.getMensaje('aerolineaId')}}</mat-error>
+                    </mat-form-field>
+    
+                    <mat-form-field appearance="outline" fxFlex="100">
+                        <mat-label>Estado del vuelo</mat-label>
+                        <mat-select formControlName="estadoVueloId" [errorStateMatcher]="validarService.matcher">
+                            <mat-option *ngFor="let estado of estados" [value]="estado.id">{{ estado.nombre | titlecase }}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="validarService.campoEsValido('estadoVueloId')">{{validarService.getMensaje('estadoVueloId')}}</mat-error>
+                    </mat-form-field>
+                </div>
+    
+                <div fxLayoutAlign="end center">
+                    <button type="submit" 
+                        mat-raised-button color="primary">
+                        Guardar
+                    </button>
+                </div>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

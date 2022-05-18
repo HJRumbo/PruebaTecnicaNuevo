@@ -1,0 +1,12 @@
+.vs/
+.vscode/
+
+/Datos/Migrations
+/Datos/bin
+/Datos/obj
+
+/Entidades/bin
+/Entidades/obj
+
+/Logica/bin
+/Logica/obj

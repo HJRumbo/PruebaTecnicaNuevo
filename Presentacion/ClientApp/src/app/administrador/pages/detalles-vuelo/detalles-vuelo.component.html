@@ -1,0 +1,63 @@
+<div fxLayout="row" 
+    fxLayoutAlign="center center">
+    <mat-card class="mat-elevation-z4" 
+        fxFlex="50"
+        fxFlex.lt-md="100">
+        <mat-card-title>
+            <div fxLayout="row"
+                fxLayoutAlign="space-between center">
+                <div fxFlex="50">
+                    <span>Vuelo Nro {{ vuelo.numeroVuelo }}</span>
+                </div>
+        
+                <div fxFlex="50"
+                    fxLayoutAlign="end">
+                    <div fxLayout="row" 
+                        fxLayoutGap="15px"
+                        fxLayoutGap.xs="10px">
+                        
+                        <button mat-raised-button 
+                            color="accent"
+                            (click)="irAConsulta()">
+                            Consultar vuelos
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </mat-card-title>
+        <mat-card-subtitle *ngIf="vuelo.ciudadDestino?.nombre && vuelo.ciudadOrigen?.nombre">{{ vuelo.ciudadOrigen!.nombre | titlecase }} - {{ vuelo.ciudadDestino!.nombre | titlecase }}</mat-card-subtitle>
+    
+        <br>
+    
+        <mat-card-content *ngIf="vuelo.aerolinea?.nombre">
+            <div fxLayout="row"
+                fxLayoutAlign="space-between center"
+                fxLayout.lt-sm="column"
+                fxLayoutAlign.lt-sm="start start">
+                <h3>
+                    Programado: {{ vuelo.fecha! | convertirFecha | date: "EEE, dd 'de' MMMM 'de' yyyy" | titlecase }}
+                </h3>
+                <h3>
+                    Aerolínea: {{ vuelo.aerolinea!.nombre | titlecase }}
+                </h3>
+            </div>
+            <h3>
+                Estado: {{ vuelo.estadoVuelo!.nombre | titlecase }}
+            </h3>
+
+            <div fxLayout="row"
+                fxLayoutAlign="space-between center"
+                fxLayout.lt-sm="column"
+                fxLayoutAlign.lt-sm="start start">
+                <h3>
+                    Hora de salida: {{ vuelo.horaSalida }}
+                </h3>
+
+                <h3>
+                    Hora de llegada: {{ vuelo.horaLlegada }}
+                </h3>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>
+
